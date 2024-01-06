@@ -1,4 +1,3 @@
-import Web3 from 'web3';
 import { Token } from '../../models/EthereumAddress';
 
 interface EthereumRepository {
