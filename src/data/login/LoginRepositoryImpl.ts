@@ -3,14 +3,18 @@ import LoginResponse from "./LoginResponse";
 import LoginRequest from "./LoginRequest";
 
 class LoginRepositoryImpl implements LoginRepository {
+    private HOST = 'https://easywallet-erc4337.onrender.com'
+
     async signup(username: string, password: string): Promise<void> {
-        const result = await fetch('http://proxyman.debug:3333/api/signup/', { method: 'POST', headers: this.headers(), body: JSON.stringify({ message: 'Hello World!' }) } )
+        let request: LoginRequest = {username: username, password: password};
+        const body = JSON.stringify(request);
+        const result = await fetch(this.HOST + '/api/login/signup/', { method: 'POST', headers: this.headers(), body: body })
     }
 
     async login(username: string, password: string): Promise<LoginResponse> {
         let request: LoginRequest = {username: username, password: password}
         const body = JSON.stringify(request);
-        const result = await fetch('http://proxyman.debug:3333/api/login/', { method: 'POST', headers: this.headers(), body: body })
+        const result = await fetch(this.HOST + '/api/login/', { method: 'POST', headers: this.headers(), body: body })
         return result.json();
     }
 

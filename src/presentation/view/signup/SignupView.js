@@ -1,9 +1,13 @@
 import './SignupView.css';
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import LoginRepositoryImpl from "../../../data/login/LoginRepositoryImpl"
 
 function SignupView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const loginRepo = new LoginRepositoryImpl();
 
   // Handle email and password input changes
   const handleEmailChange = (event) => {
@@ -17,8 +21,13 @@ function SignupView() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
-    console.log('Logging in with:', email, password);
-    await fetch('https://localhost', { method: 'POST', headers: { accept: 'application/json', body: JSON.stringify({ message: 'Hello World!' }) } })
+    console.log('Signup in with:', email);
+    try {
+      const res = await loginRepo.signup(email, password);
+      navigate('/')
+    } catch(e) {
+      console.log('logged in with ' + e)
+    }
   };
 
   return (
