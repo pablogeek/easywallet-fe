@@ -20,7 +20,7 @@ export const SendView = ({ onSend }) => {
 
     return (
         <div>
-            <h2>Send Money</h2>
+            <h2>Send MATIC</h2>
             <input 
                 type="text" 
                 value={address} 
