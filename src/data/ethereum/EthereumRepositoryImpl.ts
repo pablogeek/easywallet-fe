@@ -22,14 +22,16 @@ export class EthereumRepositoryImpl implements EthereumRepository {
     }
 
     async send(address: string, amount: string): Promise<void> {
-        let request: SendRequest = {username: 'im222@gmail.com', password: 'password', amount: amount, address: address}
+        let request: SendRequest = {amount: amount, address: address}
         const body = JSON.stringify(request);
+        console.log('headers ', this.headers());
         const result = await fetch('http://proxyman.debug:3333/api/operations/send', { method: 'POST', headers: this.headers(), body: body })
         return result.json();
     }
 
     private headers() {
-        return { accept: 'application/json', 'Content-Type': 'application/json' }
+        const jwtToken = localStorage.getItem('-easywallet-authToken');
+        return { accept: 'application/json', 'Content-Type': 'application/json', 'Authorization': jwtToken! }
     }
 }
 

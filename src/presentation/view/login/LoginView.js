@@ -25,7 +25,7 @@ function LoginView () {
     console.log('Logging in with:', email, password);
     try {
       const res = await loginRepo.login(email, password);
-      console.log('logged in with ' + res.address)
+      localStorage.setItem('-easywallet-authToken', res.key);
       navigate('/main/' + res.address)
     } catch(e) {
       console.log('logged in with ' + e)
