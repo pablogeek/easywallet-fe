@@ -37,7 +37,7 @@ function MainView() {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>Sending...</div>;
     }
 
     return (
