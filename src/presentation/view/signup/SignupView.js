@@ -8,6 +8,7 @@ function SignupView() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const loginRepo = new LoginRepositoryImpl();
+  const [isLoading, setIsLoading] = useState(false);
 
   // Handle email and password input changes
   const handleEmailChange = (event) => {
@@ -22,13 +23,19 @@ function SignupView() {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevents the default form submission behavior
     console.log('Signup in with:', email);
+    setIsLoading(true);
     try {
       const res = await loginRepo.signup(email, password);
       navigate('/')
     } catch(e) {
       console.log('logged in with ' + e)
     }
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="signup-container">

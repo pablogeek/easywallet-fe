@@ -7,6 +7,7 @@ function LoginView () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const loginRepo = new LoginRepositoryImpl();
 
@@ -24,16 +25,22 @@ function LoginView () {
     event.preventDefault(); // Prevents the default form submission behavior
     console.log('Logging in with:', email, password);
     try {
+      setIsLoading(true);
       const res = await loginRepo.login(email, password);
       localStorage.setItem('-easywallet-authToken', res.key);
       navigate('/main/' + res.address)
     } catch(e) {
       console.log('logged in with ' + e)
     }
+    setIsLoading(false);
   };
 
   const goToSignup = () =>{ 
     navigate('/signup')
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   return (
