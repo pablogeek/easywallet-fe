@@ -12,6 +12,7 @@ function MainView() {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const style = {
         position: 'absolute',
@@ -27,11 +28,17 @@ function MainView() {
 
     const ethereumRepository = new EthereumRepositoryImpl();
 
-    const handleSendMoney = (address, amount) => {
+    const handleSendMoney = async (address, amount) => {
+        setIsLoading(true);
         console.log('Sending amount:', amount);
         setOpen(false);
-        ethereumRepository.send(address, amount);
+        await ethereumRepository.send(address, amount);
+        setIsLoading(false);
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="main-container">
