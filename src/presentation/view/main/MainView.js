@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { EthereumAddressInfo } from '../../../components/EthereumAddressInfo';
 import { SendView } from '../../../components/SendView';
 import { EthereumRepositoryImpl } from '../../../data/ethereum/EthereumRepositoryImpl';
+import MainButton from "../../../components/MainButton"
 
 function MainView() {
     let { address } = useParams();
@@ -52,8 +53,9 @@ function MainView() {
                 <SendView onSend={handleSendMoney} />
             </Box>
         </Modal>
-        
-        <button onClick={handleOpen}>Send</button>
+        <MainButton variant="contained" color="primary" onClick={handleOpen}>
+        Send
+        </MainButton>
         </div>
     
     );

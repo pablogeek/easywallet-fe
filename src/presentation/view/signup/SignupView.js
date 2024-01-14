@@ -2,6 +2,7 @@ import './SignupView.css';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import LoginRepositoryImpl from "../../../data/login/LoginRepositoryImpl"
+import MainButton from "../../../components/MainButton"
 
 function SignupView() {
   const [email, setEmail] = useState('');
@@ -51,7 +52,9 @@ function SignupView() {
           <input type="password" id="password" name="password" required 
           onChange={handlePasswordChange}/>
         </div>
-        <button type="submit">Signup</button>
+        <MainButton type='submit' variant="contained" color="primary">
+          Signup
+        </MainButton>
       </form>
     </div>
   );

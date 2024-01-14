@@ -2,6 +2,7 @@ import './LoginView.css';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import LoginRepositoryImpl from "../../../data/login/LoginRepositoryImpl"
+import MainButton from "../../../components/MainButton"
 
 function LoginView () {
   const [email, setEmail] = useState('');
@@ -57,8 +58,12 @@ function LoginView () {
           <input type="password" id="password" name="password" required 
           onChange={handlePasswordChange}/>
         </div>
-        <button type="submit">Login</button>
-        <button onClick={goToSignup}>Signup</button>
+        <MainButton type='submit' variant="contained" color="primary">
+          Login
+        </MainButton>
+        <MainButton onClick={goToSignup} variant="contained" color="secondary">
+          Signup
+        </MainButton>
       </form>
     </div>
   );
